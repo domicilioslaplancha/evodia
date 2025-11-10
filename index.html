@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Evodia — Propuesta Ejecutable | Red Sapien</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --black:#000000; --white:#ffffff;
+    --text-light:#e0e0e0; --text-dark:#222222;
+    --accent:#28a745; /* único acento */
+    --maxw:1100px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;background:var(--black);color:var(--text-light);
+    font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.5;
+  }
+  a{color:inherit;text-decoration:none}
+  .container{max-width:var(--maxw);margin:0 auto;padding:48px 24px;}
+
+  /* ---------- HERO ---------- */
+  header.hero{position:relative;height:100vh;min-height:520px;display:grid;place-items:center;overflow:hidden;text-align:center}
+  header.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(100%) brightness(0.32);z-index:0}
+  /* fallback background gradient if video fails */
+  header.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#000 20%, #070707 80%);mix-blend-mode:multiply;z-index:0}
+  .hero-inner{position:relative;z-index:2;max-width:980px;padding:0 20px}
+  .eyebrow{font-weight:700;letter-spacing:1.6px;font-size:13px;color:var(--text-light);opacity:0.9}
+  h1{font-size:clamp(30px,6.5vw,56px);margin:.6rem 0 0;font-weight:900;color:var(--white);line-height:1}
+  .lead{color:var(--text-light);font-size:clamp(14px,1.6vw,18px);max-width:720px;margin:18px auto 0}
+  .cta-row{margin-top:28px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+  /* buttons */
+  .btn{
+    border-radius:999px;padding:12px 20px;font-weight:700;letter-spacing:1px;border:2px solid var(--white);
+    background:transparent;color:var(--white);cursor:pointer;transition:transform .18s ease, box-shadow .18s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn.primary{background:var(--white);color:var(--black)}
+  .btn.ghost{background:transparent}
+  .btn.whatsapp{background:#0f9d58;color:white;border-color:#0f9d58}
+
+  /* cinematic smoke (subtle) */
+  .smoke{
+    pointer-events:none;position:absolute;inset:0;z-index:1;background-image:
+      radial-gradient(ellipse at 10% 10%, rgba(255,255,255,0.02) 0, transparent 20%),
+      radial-gradient(ellipse at 85% 80%, rgba(255,255,255,0.02) 0, transparent 18%);
+    mix-blend-mode:screen;opacity:0.7;filter:blur(28px);
+    animation:slowDrift 20s linear infinite;
+  }
+  @keyframes slowDrift{0%{transform:translateY(-6px)}50%{transform:translateY(6px)}100%{transform:translateY(-6px)}}
+
+  /* ---------- SECTION: WHITE (estrategia / proyeccion) ---------- */
+  section.white{background:var(--white);color:var(--text-dark);padding:72px 0}
+  .white .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:28px}
+  .card{padding:22px;background:transparent;border-radius:8px}
+  .card h3{font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+  .card p{margin:0;color:var(--text-dark);opacity:0.92}
+
+  /* emojis style */
+  .emoji{font-size:20px;display:inline-block;width:28px;text-align:center}
+
+  /* projection grid */
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
+  .stat{background:var(--white);padding:20px;border-radius:8px;text-align:left}
+  .label{font-weight:700;font-size:13px;color:var(--text-dark);opacity:0.9}
+  .number{font-weight:900;font-size:28px;margin-top:8px;color:var(--text-dark)}
+  .number.gain{color:var(--accent)}
+
+  /* ---------- SECTION: BLACK (alianza) ---------- */
+  section.black{background:var(--black);color:var(--text-light);padding:72px 0;text-align:center}
+  .muted{opacity:0.85;color:var(--text-light)}
+
+  /* ---------- FINAL PAYMENT BOX ---------- */
+  .payment{
+    margin-top:22px;padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
+    display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  }
+  .pay-left{min-width:220px}
+  .pay-terms{font-weight:700}
+  .small{font-size:14px;color:var(--text-light);opacity:0.9}
+
+  /* ---------- subtle reveal ---------- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s ease}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+
+  /* ---------- mobile responsive ---------- */
+  @media (max-width:900px){
+    .white .grid-2{grid-template-columns:1fr}
+    .grid-4{grid-template-columns:repeat(2,1fr)}
+    .payment{flex-direction:column;align-items:flex-start}
+  }
+  @media (max-width:520px){
+    h1{font-size:28px}
+    .number{font-size:22px}
+    .grid-4{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero" role="banner" aria-label="Evodia hero">
+  <!-- Video sources: multiple mirrors + poster. If one fails, browser tries next. -->
+  <video id="hero-video" autoplay loop muted playsinline preload="metadata" poster="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=60">
+    <!-- Replace or add your own urls. Several CDN examples increase chance of load. -->
+    <source src="Video/Evodia-bg.mp4" type="video/mp4">
+    <source src="Video/Evodia-bg.mp4" type="video/mp4">
+    <!-- fallback: image shown via poster -->
+  </video>
+
+  <div class="smoke" aria-hidden="true"></div>
+
+  <div class="hero-inner container reveal" id="heroContent">
+    <div class="eyebrow">RED SAPIEN · Evodia</div>
+    <h1>Evodia — Fragancia que vende.</h1>
+    <p class="lead">Transformamos tu visión en ventas. Sistema simple, ejecución precisa y activos listos para convertir desde el día uno.</p>
+
+    <div class="cta-row">
+      <a class="btn primary" href="#estrategia">Ver Propuesta ✨</a>
+      <a class="btn ghost" href="#proyeccion">Ver Números 🔬</a>
+      <a class="btn whatsapp" href="https://wa.me/573207376174?text=Quiero%20iniciar%20con%20Evodia">Contactar (WhatsApp) 💬</a>
+    </div>
+  </div>
+</header>
+
+<!-- ESTRATEGIA -->
+<section id="estrategia" class="white">
+  <div class="container reveal">
+    <h2 style="font-weight:900">La Estrategia — Precisa.</h2>
+    <p style="max-width:760px">Sistema continuo: planificación, ejecución y optimización. Pocas acciones, alto impacto.</p>
+
+    <div class="grid-2 reveal" style="margin-top:18px">
+      <div class="card">
+        <h3><span class="emoji">⚙️</span> <span>Ads Avanzado</span></h3>
+        <p>Campañas optimizadas con pruebas A/B y feed de audiencias para bajar CPA y escalar ventas.</p>
+      </div>
+
+      <div class="card">
+        <h3><span class="emoji">📣</span> <span>Facebook — 2 campañas</span></h3>
+        <p>1) Conversión para ventas directas. 2) Orgánico + social media para fidelizar y remarketing.</p>
+      </div>
+
+      <div class="card">
+        <h3><span class="emoji">💻</span> <span>Web de Alto Nivel (Cortesía)</span></h3>
+        <p>Landing optimizada para convertir — diseño premium, hosting y dominio listos sin costo inicial.</p>
+      </div>
+
+      <div class="card">
+        <h3><span class="emoji">🗂️</span> <span>Activos Digitales</span></h3>
+        <p>Creación completa: creativos, guiones UGC, banners y piezas verticales listas para campañas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROYECCION -->
+<section id="proyeccion" class="white" aria-labelledby="proy">
+  <div class="container reveal">
+    <h2 id="proy" style="font-weight:900">La Proyección — Conservadora</h2>
+    <p style="max-width:720px">Estimación realista del primer mes. Rentabilidad desde el inicio si se respeta la inversión.</p>
+
+    <div class="grid-4 reveal" style="margin-top:18px">
+      <div class="stat">
+        <div class="label">Honorarios</div>
+        <div class="number" data-target="490000">0</div>
+        <div class="small">13 horas mensuales</div>
+      </div>
+
+      <div class="stat">
+        <div class="label">Publicidad</div>
+        <div class="number" data-target="369000">0</div>
+        <div class="small">Combustible de ventas</div>
+      </div>
+
+      <div class="stat">
+        <div class="label">Ingresos Meta</div>
+        <div class="number" data-target="1521000">0</div>
+        <div class="small">39 ventas a $39.000</div>
+      </div>
+
+      <div class="stat">
+        <div class="label">Ganancia Neta (Mes 1)</div>
+        <div class="number gain" data-target="662000">0</div>
+        <div class="small">Rentabilidad desde el día uno</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALIANZA -->
+<section id="alianza" class="black">
+  <div class="container reveal">
+    <h2 style="color:var(--white);font-weight:900">Alianza: Escalar Juntos 🚀</h2>
+    <p class="muted" style="max-width:780px;margin:12px auto 0">No vendemos servicios. Ofrecemos una alianza operativa: medir, validar y escalar con tu rentabilidad como guía.</p>
+
+    <div class="payment" style="max-width:820px;margin:28px auto 0">
+      <div class="pay-left">
+        <div class="pay-terms">Inicio: <span style="color:var(--accent)">60% del primer mes</span></div>
+        <div class="small" style="margin-top:6px">Resto: 40% al cierre del mes, sólo cuando veamos resultados visibles.</div>
+      </div>
+
+      <div style="text-align:right">
+        <div style="font-weight:900;font-size:20px;color:var(--accent)">Inversión inicial: $294.000 COP</div>
+        <div class="small" style="margin-top:6px">(Activación, diseño y setup inmediato)</div>
+        <div style="margin-top:12px">
+          <a class="btn whatsapp" href="https://wa.me/573001234567?text=Quiero%20iniciar%20Evodia%20con%2060%25%20de%20pago">Pagar 60% · Iniciar 💳</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="small" style="margin-top:18px;max-width:760px;margin-left:auto;margin-right:auto">Resumen de entrega: Ads avanzado, 2 campañas en Facebook (con estrategia orgánica), landing premium sin costo inicial y activos creativos listos para publicar.</p>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="white">
+  <div class="container reveal" style="text-align:center">
+    <h2 style="font-weight:900">Listo para Destilar la Esencia?</h2>
+    <p style="max-width:720px;margin:10px auto">Paga 60% ahora para activar. El 40% restante sólo al ver resultados al cierre de mes.</p>
+    <div style="margin-top:18px">
+      <a class="btn primary" href="https://wa.me/573207376174?text=Confirmo%20el%2060%25%20y%20quiero%20empezar">Confirmar Inicio · $294.000</a>
+      <a class="btn ghost" href="mailto:contacto@redsapien.com?subject=Evodia%20Propuesta">Enviar correo ✉️</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // IntersectionObserver reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting) e.target.classList.add('visible');
+    });
+  },{threshold:0.18});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Animated counters (easing)
+  function animateNumber(el){
+    const target = parseInt(el.dataset.target || 0,10);
+    const duration = 1400;
+    const start = 0;
+    const startTime = performance.now();
+    function step(now){
+      const t = Math.min((now - startTime)/duration,1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const val = Math.floor(start + (target - start)*eased);
+      el.textContent = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".");
+      if(t<1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  // observe counters
+  const counterIO = new IntersectionObserver((entries,obs)=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        animateNumber(en.target);
+        obs.unobserve(en.target);
+      }
+    });
+  },{threshold:0.6});
+  document.querySelectorAll('.number[data-target]').forEach(n=>counterIO.observe(n));
+
+  // Ensure video plays: try play and fallback to poster if blocked
+  const vid = document.getElementById('hero-video');
+  if(vid){
+    vid.play().catch(()=>{ // attempt to unmute briefly then mute if needed (most browsers block autoplay with sound)
+      vid.muted = true;
+      vid.play().catch(()=>{ /* fallback: poster will show */ });
+    });
+  }
+
+  // small parallax on scroll for hero content (subtle)
+  window.addEventListener('scroll', ()=>{
+    const hero = document.querySelector('.hero-inner');
+    if(!hero) return;
+    const y = Math.min(window.scrollY, 300);
+    hero.style.transform = `translateY(${y*0.06}px)`;
+  }, {passive:true});
+</script>
+</body>
+</html>
